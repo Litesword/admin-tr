@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import MyForm from './Form';
-import AddDepartment from './AddDepartment';
+
 
 function App() {
   const [selectedButton, setSelectedButton] = useState(null);
