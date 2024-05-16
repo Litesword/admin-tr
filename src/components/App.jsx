@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-
+import HRQuestions from './hrQuestions';
 
 function App() {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -29,7 +29,7 @@ function App() {
       case 'TR questions':
         return <div>Upload TR questions</div>;
       case 'HR questions':
-        return <div>Upload HR questions</div>;
+        return <HRQuestions />;
       case 'MCQs':
         return <div>Upload MCQs</div>;
       case 'Mock Interview Requests':
