@@ -21,7 +21,7 @@ function HRQuestions() {
     }
 
     try {
-      const response = await axios.post('/api/hrQuestions', { question, answer });
+      const response = await axios.post('http://localhost:8080/api/hrQuestions', { question, answer });
       console.log(response.data);
       setQuestion('');
       setAnswer('');
