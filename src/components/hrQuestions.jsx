@@ -1,32 +1,47 @@
 import React, { useState } from 'react';
 import './hrQuestions.css';
+import axios from 'axios';
 
 function HRQuestions() {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [error, setError] = useState(null);
 
- const handleSubmit = (event) => {
-  event.preventDefault();
-  if (!question.trim() || !answer.trim()) {
-    alert('Both fields are required');
-    return;
-  }
-  // Here you can handle the submission, e.g., send the data to the server
-  console.log(`Question: ${question}, Answer: ${answer}`);
-  setQuestion('');
-  setAnswer('');
-};
+  const handleChange = setter => async event => {
+    setter(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(null);
+
+    if (!question.trim() || !answer.trim()) {
+      setError('Both fields are required');
+      return;
+    }
+
+    try {
+      const response = await axios.post('/api/hrQuestions', { question, answer });
+      console.log(response.data);
+      setQuestion('');
+      setAnswer('');
+    } catch (error) {
+      console.error('An error occurred:', error);
+      setError('An error occurred while submitting the form');
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Question:
-        <input type="text" value={question} onChange={e => setQuestion(e.target.value)} />
+        <input type="text" value={question} onChange={handleChange(setQuestion)} />
       </label>
       <label>
         Answer:
-        <input type="text" value={answer} onChange={e => setAnswer(e.target.value)} />
+        <input type="text" value={answer} onChange={handleChange(setAnswer)} />
       </label>
+      {error && <p className="error">{error}</p>}
       <input type="submit" value="Submit" />
     </form>
   );
