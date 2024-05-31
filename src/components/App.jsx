@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 import HRQuestions from './hrQuestions';
+import TRquestions from './TrQuestions';
+import SubjectForm from './Subjects';
+import MCQComponent from './Mcqs';
 
 function App() {
   const [selectedButton, setSelectedButton] = useState(null);
@@ -25,13 +28,13 @@ function App() {
       case 'Send a Notification':
         return <div>Send a Notification content</div>;
       case 'Create Subject':
-        return <div>Create Subject</div>;
+        return <SubjectForm />;
       case 'TR questions':
-        return <div>Upload TR questions</div>;
+        return <TRquestions />;
       case 'HR questions':
         return <HRQuestions />;
       case 'MCQs':
-        return <div>Upload MCQs</div>;
+        return <MCQComponent/>;
       case 'Mock Interview Requests':
         return <div>Mock Interview Requests</div>;
       case 'Mentoring Requests':
